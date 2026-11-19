@@ -15,6 +15,7 @@
       <span hidden class="brand-fallback">晟</span>
     </button>
     <div class="header-title"><strong>晟自然玩科學</strong><span class="separator">｜</span><span id="headerModule">光與顏色</span></div>
+    <a class="line-btn" href="https://line.me/ti/g2/TTCqPpZP6lQqX1z_AUDPNm4977Dvylew3O7oBg" target="_blank" rel="noopener noreferrer" aria-label="加 LINE 討論，另開視窗">加 LINE 討論</a>
   </header>
   <main class="main-content">
     <section id="menuView" class="menu-view" aria-labelledby="menuHeading">
@@ -28,23 +29,27 @@
     </section>
     <section id="dispersionView" class="dispersion-view" hidden aria-label="光的色散互動實驗">
       <div class="sim-stage">
-        <svg id="opticsSvg" viewBox="-275 -55 715 390" preserveAspectRatio="xMidYMid meet" role="img" aria-label="光源照射固定三稜鏡，白光經折射形成連續色散光帶">
-          <defs><clipPath id="plotClip"><rect x="-275" y="-55" width="715" height="390"/></clipPath></defs>
+        <svg id="opticsSvg" viewBox="-246 -28 577 276" preserveAspectRatio="xMidYMid meet" role="img" aria-label="光源照射固定三稜鏡，白光經折射形成連續色散光帶">
+          <defs>
+            <clipPath id="plotClip"><rect x="-246" y="-28" width="577" height="276"/></clipPath>
+            <clipPath id="prismClip"><polygon points="0,0 -100,173.20508076 100,173.20508076"/></clipPath>
+          </defs>
           <g clip-path="url(#plotClip)">
             <path id="sourceArc" fill="none" stroke="#758ca4" stroke-width="1.6" stroke-dasharray="5 6" opacity=".65"/>
-            <g id="incomingRays"></g><g id="innerRays"></g><g id="outgoingRays"></g>
+            <g id="incomingRays"></g><g id="innerRays" clip-path="url(#prismClip)"></g><g id="outgoingRays"></g>
             <polygon points="0,0 -100,173.20508076 100,173.20508076" fill="#9ad5e5" fill-opacity=".08" stroke="#8abacb" stroke-width="2.2"/>
             <g id="normalLines" fill="none" stroke="#cddce8" stroke-width="1.2" stroke-dasharray="5 4" opacity=".7"></g>
             <circle cx="-50" cy="86.60254" r="3" fill="#fff"/>
             <g id="sourceHandle" tabindex="0" role="slider" aria-label="調整光源入射方向" aria-valuemin="-32" aria-valuemax="-10" aria-valuenow="-21"><circle class="source-hit" r="26" fill="transparent"/><circle class="source-body" r="10"/><circle r="3" fill="#17212f"/></g>
           </g>
         </svg>
-        <p class="drag-hint">拖曳左側光源，改變入射方向</p>
       </div>
       <aside class="experiment-sidebar">
         <div class="info-card">
-          <h2>光的色散</h2>
-          <p id="resultText">白光通過三稜鏡後，因不同波長的折射程度不同，形成彩色光帶。</p>
+          <div class="info-heading"><h2>光的色散</h2><span class="info-badge" id="lightStatus">白光</span></div>
+          <p class="status-note">💡 拖曳左側黃色光源，改變入射方向。</p>
+          <p class="result-description" id="resultText">白光進入三稜鏡後就開始色散，出射後形成彩色光帶。</p>
+          <p class="illustration-note" id="visualNote">※ 為了容易觀察，圖中各色光的分離幅度已視覺放大。</p>
         </div>
         <div class="controls-card">
           <h2>光源顏色</h2>
