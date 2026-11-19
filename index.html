@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#252536">
+<title>晟自然玩科學｜光與顏色（本機測試）</title>
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<div id="app" class="app-shell">
+  <header class="main-header">
+    <button type="button" class="brand-button" id="homeButton" aria-label="返回光與顏色主選單" title="返回光與顏色主選單">
+      <img src="assets/head.png" alt="" id="brandImage" onerror="this.hidden=true;this.nextElementSibling.hidden=false">
+      <span hidden class="brand-fallback">晟</span>
+    </button>
+    <div class="header-title"><strong>晟自然玩科學</strong><span class="separator">｜</span><span id="headerModule">光與顏色</span></div>
+  </header>
+  <main class="main-content">
+    <section id="menuView" class="menu-view" aria-labelledby="menuHeading">
+      <div class="menu-heading"><p class="eyebrow">LIGHT & COLOR</p><h1 id="menuHeading">光與顏色</h1><p>選擇一項實驗，觀察光與色彩的變化。</p></div>
+      <div class="experiment-grid">
+        <button class="experiment-card ready" id="dispersionEntry" type="button"><span class="card-icon" aria-hidden="true">🌈</span><strong>光的色散</strong><span>白光與三稜鏡</span><em>進入實驗</em></button>
+        <div class="experiment-card disabled"><span class="card-icon" aria-hidden="true">🔴</span><strong>有色物體的反射</strong><span>光線與物體顏色</span><em>尚未開放</em></div>
+        <div class="experiment-card disabled"><span class="card-icon" aria-hidden="true">🟦</span><strong>有色透明物體的透射</strong><span>透明色片與透射光</span><em>尚未開放</em></div>
+        <div class="experiment-card disabled"><span class="card-icon" aria-hidden="true">🔵</span><strong>光的三原色</strong><span>RGB 加色混合</span><em>尚未開放</em></div>
+      </div>
+    </section>
+    <section id="dispersionView" class="dispersion-view" hidden aria-label="光的色散互動實驗">
+      <div class="sim-stage">
+        <svg id="opticsSvg" viewBox="-275 -55 715 390" preserveAspectRatio="xMidYMid meet" role="img" aria-label="光源照射固定三稜鏡，白光經折射形成連續色散光帶">
+          <defs><clipPath id="plotClip"><rect x="-275" y="-55" width="715" height="390"/></clipPath></defs>
+          <g clip-path="url(#plotClip)">
+            <path id="sourceArc" fill="none" stroke="#758ca4" stroke-width="1.6" stroke-dasharray="5 6" opacity=".65"/>
+            <g id="incomingRays"></g><g id="innerRays"></g><g id="outgoingRays"></g>
+            <polygon points="0,0 -100,173.20508076 100,173.20508076" fill="#9ad5e5" fill-opacity=".08" stroke="#8abacb" stroke-width="2.2"/>
+            <g id="normalLines" fill="none" stroke="#cddce8" stroke-width="1.2" stroke-dasharray="5 4" opacity=".7"></g>
+            <circle cx="-50" cy="86.60254" r="3" fill="#fff"/>
+            <g id="sourceHandle" tabindex="0" role="slider" aria-label="調整光源入射方向" aria-valuemin="-32" aria-valuemax="-10" aria-valuenow="-21"><circle class="source-hit" r="26" fill="transparent"/><circle class="source-body" r="10"/><circle r="3" fill="#17212f"/></g>
+          </g>
+        </svg>
+        <p class="drag-hint">拖曳左側光源，改變入射方向</p>
+      </div>
+      <aside class="experiment-sidebar">
+        <div class="info-card">
+          <h2>光的色散</h2>
+          <p id="resultText">白光通過三稜鏡後，因不同波長的折射程度不同，形成彩色光帶。</p>
+        </div>
+        <div class="controls-card">
+          <h2>光源顏色</h2>
+          <div class="light-buttons" role="group" aria-label="選擇光源顏色">
+            <button type="button" class="light-option selected" data-light="W" aria-pressed="true">白光 W</button>
+            <button type="button" class="light-option" data-light="R" aria-pressed="false">紅光 R</button>
+            <button type="button" class="light-option" data-light="G" aria-pressed="false">綠光 G</button>
+            <button type="button" class="light-option" data-light="B" aria-pressed="false">藍光 B</button>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </main>
+</div>
+<script type="module" src="assets/app.js"></script>
+</body>
+</html>
