@@ -5,3 +5,14 @@
 @media (max-width:420px) and (orientation:portrait){.sim-stage{min-height:200px}.dispersion-view{padding-left:6px;padding-right:6px}.info-card,.controls-card{padding:9px 10px}.light-option{font-size:12px}.experiment-card{min-height:140px}}
 
 @media (max-width:420px) and (orientation:portrait){.main-header{gap:8px;padding-left:9px;padding-right:9px}.brand-button{width:40px;height:40px;flex-basis:40px}.header-title{font-size:clamp(11px,3.3vw,14px)}.line-btn{font-size:11px;padding:7px 7px}.sim-stage{min-height:215px}.status-note{font-size:12px!important}}
+
+/* Step 83: stable panel geometry across W/R/G/B changes and clearer guides. */
+@media (orientation:portrait){
+  .info-card{height:151px;min-height:151px;flex:0 0 151px;overflow:auto}
+}
+@media (orientation:landscape) and (max-height:600px) and (max-width:1100px){
+  .info-card{height:auto;min-height:0;flex:1 1 0;overflow:auto}
+}
+#sourceArc{stroke:#f9ce65;stroke-width:2.6;stroke-dasharray:6 5;opacity:1}
+#normalLines{stroke:#f7f9fb;stroke-width:2.2;stroke-dasharray:7 5;opacity:.96}
+.source-body{stroke:#ffe18c;stroke-width:3.4}
