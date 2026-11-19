@@ -18,13 +18,16 @@ function spectrumColor(nm) {
   const t=Math.max(0,Math.min(1,(nm-a)/(b-a)));
   return `rgb(${c1.map((v,k)=>Math.round(v+(c2[k]-v)*t)).join(',')})`;
 }
-function normal(group,at,vector){segment(group,add(at,vector,-20),add(at,vector,20),'#d2dbe5',.9,.55);}
+function normal(group,at,vector){segment(group,add(at,vector,-32),add(at,vector,32),'#f7f9fb',2.2,.95);}
 
 // Educational display-only exaggeration; optics.js still calculates the physically
 // correct refractive index, Snell-law directions and prism intersections.
 // Shift each wavelength's exit point *along the actual prism surface* so the
 // displayed internal color fan is legible, even on a phone.
-const rightEdgeTangent=[-.5,Math.sqrt(3)/2];
+// Right side runs from apex (0,0) to bottom-right (100,173.205...).
+// This tangent MUST follow that edge; the old negative x-component
+// incorrectly moved display rays off the glass surface and caused seams.
+const rightEdgeTangent=[.5,Math.sqrt(3)/2];
 const fanShift=nm=>(550-nm)/150*11;
 const endpointX=305;
 function visibleExit(ray){return add(ray.exit,rightEdgeTangent,fanShift(ray.wavelengthNm));}
