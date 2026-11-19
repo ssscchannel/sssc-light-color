@@ -1,0 +1,1 @@
+{"name":"sssc-light-color-step75-local","private":true,"type":"module","scripts":{"test":"node --test tests/optics.test.mjs"}}
