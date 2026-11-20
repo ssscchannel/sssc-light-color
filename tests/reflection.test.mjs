@@ -1,0 +1,12 @@
+import test from 'node:test';import assert from 'node:assert/strict';
+import {LIGHTS,OBJECTS,reflectedMask,reflectedCode,reflectedColor,hasReflectedLight,description,COLORS} from '../assets/reflection-model.js';
+test('seven light and eight object options',()=>{assert.equal(Object.keys(LIGHTS).length,7);assert.equal(Object.keys(OBJECTS).length,8);});
+test('white light reveals original object colors',()=>{for(const o of Object.keys(OBJECTS))assert.equal(reflectedMask('W',o),OBJECTS[o]);});
+test('white object reflects incident light',()=>{for(const l of Object.keys(LIGHTS))assert.equal(reflectedMask(l,'W'),LIGHTS[l]);});
+test('black object has no reflected light',()=>{for(const l of Object.keys(LIGHTS))assert.equal(reflectedCode(l,'K'),'K');});
+test('complementary filtered cases go black',()=>{assert.equal(reflectedCode('R','C'),'K');assert.equal(reflectedCode('B','Y'),'K');assert.equal(reflectedCode('G','M'),'K');});
+test('yellow light on cyan reflects green',()=>assert.equal(reflectedCode('Y','C'),'G'));
+test('magenta light on yellow reflects red',()=>assert.equal(reflectedCode('M','Y'),'R'));
+test('cyan light on magenta reflects blue',()=>assert.equal(reflectedCode('C','M'),'B'));
+test('all 56 combinations are valid and masked by source and object',()=>{for(const l of Object.keys(LIGHTS))for(const o of Object.keys(OBJECTS)){const m=reflectedMask(l,o);assert.equal(m & LIGHTS[l],m);assert.equal(m & OBJECTS[o],m);assert.ok(Object.values(COLORS).includes(reflectedColor(l,o)));assert.equal(hasReflectedLight(l,o),m!==0);assert.ok(description(l,o).length>15);}});
+test('rejects unknown colors',()=>{assert.throws(()=>reflectedMask('X','W'));assert.throws(()=>reflectedMask('R','X'));});
