@@ -23,7 +23,7 @@
       <div class="experiment-grid">
         <button class="experiment-card ready" id="dispersionEntry" type="button"><span class="card-icon" aria-hidden="true">🌈</span><strong>光的色散</strong><span>白光與三稜鏡</span><em>進入實驗</em></button>
         <button class="experiment-card ready" id="reflectionEntry" type="button"><span class="card-icon" aria-hidden="true">🔴</span><strong>有色物體的反射</strong><span>光線與物體顏色</span><em>進入實驗</em></button>
-        <div class="experiment-card disabled"><span class="card-icon" aria-hidden="true">🟦</span><strong>有色透明物體的透射</strong><span>透明色片與透射光</span><em>尚未開放</em></div>
+        <button class="experiment-card ready" id="transmissionEntry" type="button"><span class="card-icon" aria-hidden="true">🟦</span><strong>有色透明物體的透射</strong><span>透明色片與透射光</span><em>進入實驗</em></button>
         <div class="experiment-card disabled"><span class="card-icon" aria-hidden="true">🔵</span><strong>光的三原色</strong><span>RGB 加色混合</span><em>尚未開放</em></div>
       </div>
     </section>
@@ -87,6 +87,31 @@
         <div class="controls-card reflection-controls">
           <h2>光源顏色</h2><div id="reflectionLights" class="reflection-color-buttons" role="group" aria-label="選擇照射光的顏色"></div>
           <h2 class="reflection-control-heading">物體顏色</h2><div id="reflectionObjects" class="reflection-color-buttons" role="group" aria-label="選擇物體的原始顏色"></div>
+        </div>
+      </aside>
+    </section>
+    <section id="transmissionView" class="dispersion-view transmission-view" hidden aria-label="有色透明物體的透射互動實驗">
+      <div class="sim-stage transmission-stage">
+        <svg id="transmissionDiagram" viewBox="0 0 600 350" preserveAspectRatio="xMidYMid meet" role="img" aria-label="白光穿過紅色透明色片後射出紅光">
+          <g id="transmissionRays"></g>
+          <rect id="transmissionPlateFirst" x="274" y="90" width="16" height="168" rx="3" stroke="#e8f0fa" stroke-width="2" fill="#FF4A54" opacity=".85"/>
+          <rect id="transmissionPlateSecond" x="355" y="90" width="16" height="168" rx="3" stroke="#e8f0fa" stroke-width="2" fill="#4A9EFF" opacity=".85" hidden/>
+          <circle cx="65" cy="173" r="12" fill="#fff9d6" stroke="#ffdf77" stroke-width="3"/><circle cx="65" cy="173" r="3" fill="#304453"/>
+        </svg>
+      </div>
+      <aside class="experiment-sidebar transmission-sidebar">
+        <div class="info-card transmission-info">
+          <div class="info-heading"><h2>有色透明物體的透射</h2><span class="info-badge" id="transmissionStatus">單片色片</span></div>
+          <div class="transmission-result"><span class="reflection-swatch" id="transmissionResultSwatch"></span><div><small>最後透射結果</small><strong id="transmissionResultName">紅光</strong></div></div>
+          <p class="reflection-explanation" id="transmissionExplanation"></p>
+          <p class="illustration-note">※ 理想化 RGB 色光模型：無可透過的成分時，不繪製後續光路。</p>
+        </div>
+        <div class="controls-card transmission-controls">
+          <h2>照射光源</h2><div id="transmissionLights" class="reflection-color-buttons" role="group" aria-label="選擇照射光源"></div>
+          <h2 class="reflection-control-heading">透明色片</h2>
+          <div class="transmission-filter-row"><label for="transmissionFilter0">第一片（靠光源）</label><select id="transmissionFilter0" aria-label="第一片色片顏色"></select></div>
+          <div class="transmission-filter-row" id="transmissionSecondControl" hidden><label for="transmissionFilter1">第二片</label><select id="transmissionFilter1" aria-label="第二片色片顏色"></select></div>
+          <div class="transmission-actions"><button type="button" id="transmissionAdd">新增第二片</button><button type="button" id="transmissionRemove" hidden>移除第二片</button><button type="button" id="transmissionSwap" disabled>交換前後</button></div>
         </div>
       </aside>
     </section>
