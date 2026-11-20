@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#252536">
-<meta name="app-version" content="v90.2">
+<meta name="app-version" content="v92.1-local">
 <title>晟自然玩科學｜光與顏色（本機測試）</title>
-<link rel="stylesheet" href="assets/style.css?v=90.2">
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 <div id="app" class="app-shell">
@@ -25,7 +25,7 @@
         <button class="experiment-card ready" id="dispersionEntry" type="button"><span class="card-icon" aria-hidden="true">🌈</span><strong>光的色散</strong><span>白光與三稜鏡</span><em>進入實驗</em></button>
         <button class="experiment-card ready" id="reflectionEntry" type="button"><span class="card-icon" aria-hidden="true">🔴</span><strong>有色物體的反射</strong><span>光線與物體顏色</span><em>進入實驗</em></button>
         <button class="experiment-card ready" id="transmissionEntry" type="button"><span class="card-icon" aria-hidden="true">🟦</span><strong>有色透明物體的透射</strong><span>透明色片與透射光</span><em>進入實驗</em></button>
-        <div class="experiment-card disabled"><span class="card-icon" aria-hidden="true">🔵</span><strong>光的三原色</strong><span>RGB 加色混合</span><em>尚未開放</em></div>
+        <button class="experiment-card ready" id="additiveEntry" type="button"><span class="card-icon" aria-hidden="true">🔵</span><strong>光的三原色</strong><span>RGB 加色混合</span><em>進入實驗</em></button>
       </div>
     </section>
     <section id="dispersionView" class="dispersion-view" hidden aria-label="光的色散互動實驗">
@@ -118,29 +118,46 @@
         </div>
       </aside>
     </section>
+    <section id="additiveView" class="dispersion-view additive-view" hidden aria-label="光的三原色加色混合互動實驗">
+      <div class="sim-stage additive-stage">
+        <svg id="additiveDiagram" viewBox="0 0 600 405" preserveAspectRatio="xMidYMid meet" role="img" aria-label="紅綠藍三束色光投射在同一處，重疊形成青色、洋紅色、黃色及白色">
+          <g class="additive-circles" id="additiveCircles">
+            <circle id="additiveRed" cx="245" cy="165" r="112" fill="#ff0000"/>
+            <circle id="additiveGreen" cx="355" cy="165" r="112" fill="#00ff00"/>
+            <circle id="additiveBlue" cx="300" cy="259" r="112" fill="#0000ff"/>
+          </g>
+        </svg>
+      </div>
+      <aside class="experiment-sidebar additive-sidebar">
+        <div class="info-card additive-info">
+          <div class="info-heading"><h2>光的三原色</h2><span class="info-badge" id="additiveStatus">三色全開</span></div>
+          <p class="status-note">💡 點選色光按鈕，觀察交疊區的顏色變化。</p>
+          <p class="result-description" id="additiveExplanation">紅光、綠光、藍光重疊：兩色混合可形成黃、青、洋紅；三色共同重疊形成白光。</p>
+          <p class="illustration-note">※ 理想化 RGB 加色混合示意，不代表實際投影設備的亮度或色域。</p>
+        </div>
+        <div class="controls-card additive-controls">
+          <h2>色光開關</h2>
+          <div class="additive-buttons" role="group" aria-label="控制紅、綠、藍色光開關">
+            <button type="button" class="additive-option" data-additive="R" aria-pressed="true"><span class="additive-dot red"></span>紅光 R<span class="additive-onoff">開</span></button>
+            <button type="button" class="additive-option" data-additive="G" aria-pressed="true"><span class="additive-dot green"></span>綠光 G<span class="additive-onoff">開</span></button>
+            <button type="button" class="additive-option" data-additive="B" aria-pressed="true"><span class="additive-dot blue"></span>藍光 B<span class="additive-onoff">開</span></button>
+          </div>
+        </div>
+      </aside>
+    </section>
   </main>
-  <!-- Temporary, menu-only development version control; remove after final acceptance. -->
+  <!-- Development-only version check; remove after final acceptance -->
   <div id="devVersionBar" class="dev-version-bar" hidden>
-    <button type="button" id="devVersionButton">檢查／更新版本 <span id="devVersionLabel">v90.2</span></button>
+    <button type="button" id="devVersionButton">檢查／更新版本 <span id="devVersionLabel">v92.1</span></button>
     <span id="devVersionStatus" role="status" aria-live="polite">測試版</span>
   </div>
 </div>
-<style>
-.dev-version-bar{position:fixed;right:max(10px,env(safe-area-inset-right));bottom:max(9px,env(safe-area-inset-bottom));z-index:30;display:flex;align-items:center;gap:7px;max-width:calc(100vw - 20px);font-size:11px;color:#d0dfd5;pointer-events:none}
-.dev-version-bar[hidden]{display:none!important}
-.dev-version-bar button{pointer-events:auto;cursor:pointer;padding:7px 10px;border:1px solid #91cfa6;background:#344b3d;color:#fff;border-radius:9px;font-size:11px;font-weight:700;box-shadow:0 2px 8px #0007}
-.dev-version-bar button:disabled{opacity:.6;cursor:wait}
-@media (orientation:landscape) and (max-height:600px){.dev-version-bar{bottom:max(4px,env(safe-area-inset-bottom));right:5px}.dev-version-bar button{padding:5px 7px}}
-</style>
 <script>
-/* Development-only refresh: fetch current repository assets with cache reload, then navigate to uncached page URL. */
 (()=>{
   const bar=document.getElementById('devVersionBar');
   const button=document.getElementById('devVersionButton');
   const status=document.getElementById('devVersionStatus');
-  const version=document.querySelector('meta[name="app-version"]').content;
   const menu=document.getElementById('menuView');
-  // Only show the temporary action on the four-experiment menu.
   const updateVisibility=()=>{bar.hidden=menu.hidden;};
   new MutationObserver(updateVisibility).observe(menu,{attributes:true,attributeFilter:['hidden']});
   updateVisibility();
@@ -149,26 +166,17 @@
     try{
       const marker=Date.now();
       const fresh=await fetch(new URL('index.html?versionCheck='+marker,location.href),{cache:'no-store'});
-      if(!fresh.ok)throw new Error('無法取得首頁：HTTP '+fresh.status);
-      const freshHtml=await fresh.text();
-      const currentVersion=(freshHtml.match(/<meta\s+name="app-version"\s+content="([^"]+)"/)||[])[1]||'未知版本';
-      status.textContent='取得 '+currentVersion+'，正在更新…';
-      const files=['index.html','assets/style.css','assets/app.js','assets/optics.js','assets/dispersion.js','assets/reflection.js','assets/reflection-model.js','assets/transmission.js','assets/transmission-model.js'];
-      const results=await Promise.all(files.map(async file=>{
-        const r=await fetch(new URL(file,location.href),{cache:'reload'});
-        if(!r.ok)throw new Error(file+'：HTTP '+r.status);
-        return file;
-      }));
-      if(results.length!==files.length)throw new Error('資源更新不完整');
-      status.textContent=currentVersion===version?'已重新取得資源':'發現新版 '+currentVersion;
-      const target=new URL('./',location.href);
-      target.searchParams.set('refresh',String(marker));
-      location.replace(target.href);
-    }catch(err){status.textContent='更新失敗，請再按一次';button.disabled=false;console.error('Version refresh failed',err);}
+      if(!fresh.ok)throw new Error('網頁尚未發布');
+      const html=await fresh.text();
+      const version=(html.match(/<meta\s+name="app-version"\s+content="([^"]+)"/)||[])[1]||'未知版本';
+      status.textContent='找到 '+version+'，正在更新…';
+      const files=['index.html','assets/style.css','assets/app.js','assets/optics.js','assets/dispersion.js','assets/reflection.js','assets/reflection-model.js','assets/transmission.js','assets/transmission-model.js','assets/additive.js','assets/additive-model.js'];
+      await Promise.all(files.map(async file=>{const r=await fetch(new URL(file,location.href),{cache:'reload'});if(!r.ok)throw new Error(file+' 尚未發布');}));
+      const u=new URL('./',location.href);u.searchParams.set('refresh',String(marker));location.replace(u.href);
+    }catch(e){status.textContent='更新失敗，請稍後重試';button.disabled=false;console.warn(e);}
   });
 })();
 </script>
-<script type="module" src="assets/app.js?v=87.2"></script>
-<script type="module" src="assets/app.js?v=90.2"></script>
+<script type="module" src="assets/app.js"></script>
 </body>
 </html>
