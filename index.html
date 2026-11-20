@@ -22,7 +22,7 @@
       <div class="menu-heading"><p class="eyebrow">LIGHT & COLOR</p><h1 id="menuHeading">光與顏色</h1><p>選擇一項實驗，觀察光與色彩的變化。</p></div>
       <div class="experiment-grid">
         <button class="experiment-card ready" id="dispersionEntry" type="button"><span class="card-icon" aria-hidden="true">🌈</span><strong>光的色散</strong><span>白光與三稜鏡</span><em>進入實驗</em></button>
-        <div class="experiment-card disabled"><span class="card-icon" aria-hidden="true">🔴</span><strong>有色物體的反射</strong><span>光線與物體顏色</span><em>尚未開放</em></div>
+        <button class="experiment-card ready" id="reflectionEntry" type="button"><span class="card-icon" aria-hidden="true">🔴</span><strong>有色物體的反射</strong><span>光線與物體顏色</span><em>進入實驗</em></button>
         <div class="experiment-card disabled"><span class="card-icon" aria-hidden="true">🟦</span><strong>有色透明物體的透射</strong><span>透明色片與透射光</span><em>尚未開放</em></div>
         <div class="experiment-card disabled"><span class="card-icon" aria-hidden="true">🔵</span><strong>光的三原色</strong><span>RGB 加色混合</span><em>尚未開放</em></div>
       </div>
@@ -59,6 +59,34 @@
             <button type="button" class="light-option" data-light="G" aria-pressed="false">綠光 G</button>
             <button type="button" class="light-option" data-light="B" aria-pressed="false">藍光 B</button>
           </div>
+        </div>
+      </aside>
+    </section>
+    <section id="reflectionView" class="dispersion-view reflection-view" hidden aria-label="有色物體的反射互動實驗">
+      <div class="sim-stage reflection-stage">
+        <svg id="reflectionDiagram" viewBox="0 0 620 355" preserveAspectRatio="xMidYMid meet" role="img" aria-label="白光照射紅色物體，反射紅光">
+          <g id="reflectionIncoming"></g>
+          <g id="reflectionOutgoing"></g>
+          <rect id="reflectionPlate" x="389" y="75" width="22" height="200" rx="3" fill="#FF4A54" stroke="#eff7ff" stroke-width="3"/>
+          <line x1="389" y1="75" x2="389" y2="275" stroke="#ffffff30" stroke-width="2"/>
+          <circle cx="90" cy="296" r="11" fill="#fff9d6" stroke="#ffdf77" stroke-width="3"/>
+          <circle cx="90" cy="296" r="3.4" fill="#304453"/>
+          <circle cx="395" cy="166" r="4" fill="#ffffff"/>
+        </svg>
+      </div>
+      <aside class="experiment-sidebar reflection-sidebar">
+        <div class="info-card reflection-info">
+          <div class="info-heading"><h2>有色物體的反射</h2><span class="info-badge" id="reflectionStatus">白色光 × 紅色物體</span></div>
+          <div class="reflection-comparison" aria-label="白光下與目前光照下的物體顏色比較">
+            <div class="reflection-color-result"><span class="reflection-swatch" id="reflectionOriginalSwatch"></span><div><small>白光下的原始顏色</small><strong id="reflectionOriginalName">紅色</strong></div></div>
+            <div class="reflection-color-result"><span class="reflection-swatch" id="reflectionResultSwatch"></span><div><small>目前照射結果</small><strong id="reflectionResultName">紅色</strong></div></div>
+          </div>
+          <p class="reflection-explanation" id="reflectionExplanation"></p>
+          <p class="illustration-note">※ 使用理想化 RGB 模型；反射光線以一條代表線表示。</p>
+        </div>
+        <div class="controls-card reflection-controls">
+          <h2>光源顏色</h2><div id="reflectionLights" class="reflection-color-buttons" role="group" aria-label="選擇照射光的顏色"></div>
+          <h2 class="reflection-control-heading">物體顏色</h2><div id="reflectionObjects" class="reflection-color-buttons" role="group" aria-label="選擇物體的原始顏色"></div>
         </div>
       </aside>
     </section>
