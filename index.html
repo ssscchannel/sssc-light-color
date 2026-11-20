@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#252536">
-<meta name="app-version" content="v87.2">
+<meta name="app-version" content="v90.2">
 <title>晟自然玩科學｜光與顏色（本機測試）</title>
-<link rel="stylesheet" href="assets/style.css?v=87.2">
+<link rel="stylesheet" href="assets/style.css?v=90.2">
 </head>
 <body>
 <div id="app" class="app-shell">
@@ -110,16 +110,18 @@
         <div class="controls-card transmission-controls">
           <h2>照射光源</h2><div id="transmissionLights" class="reflection-color-buttons" role="group" aria-label="選擇照射光源"></div>
           <h2 class="reflection-control-heading">透明色片</h2>
-          <div class="transmission-filter-row"><label for="transmissionFilter0">第一片（靠光源）</label><select id="transmissionFilter0" aria-label="第一片色片顏色"></select></div>
-          <div class="transmission-filter-row" id="transmissionSecondControl" hidden><label for="transmissionFilter1">第二片</label><select id="transmissionFilter1" aria-label="第二片色片顏色"></select></div>
-          <div class="transmission-actions"><button type="button" id="transmissionAdd">新增第二片</button><button type="button" id="transmissionRemove" hidden>移除第二片</button><button type="button" id="transmissionSwap" disabled>交換前後</button></div>
+          <div class="transmission-filter-pair">
+            <div class="transmission-filter-column"><label for="transmissionFilter0">第一片（靠光源）</label><select id="transmissionFilter0" aria-label="第一片色片顏色"></select></div>
+            <div class="transmission-filter-column"><label for="transmissionFilter1">第二片</label><select id="transmissionFilter1" aria-label="第二片色片顏色，選無代表移除"></select></div>
+          </div>
+          <div class="transmission-actions"><button type="button" id="transmissionSwap" disabled>交換前後</button></div>
         </div>
       </aside>
     </section>
   </main>
   <!-- Temporary, menu-only development version control; remove after final acceptance. -->
   <div id="devVersionBar" class="dev-version-bar" hidden>
-    <button type="button" id="devVersionButton">檢查／更新版本 <span id="devVersionLabel">v87.2</span></button>
+    <button type="button" id="devVersionButton">檢查／更新版本 <span id="devVersionLabel">v90.2</span></button>
     <span id="devVersionStatus" role="status" aria-live="polite">測試版</span>
   </div>
 </div>
@@ -167,5 +169,6 @@
 })();
 </script>
 <script type="module" src="assets/app.js?v=87.2"></script>
+<script type="module" src="assets/app.js?v=90.2"></script>
 </body>
 </html>
