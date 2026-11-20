@@ -66,3 +66,17 @@
 .transmission-view .transmission-option.selected{outline:2px solid #e5be55;outline-offset:1px;border-color:var(--subject-deep);background:var(--subject-soft);color:#23573a}
 @media (orientation:landscape) and (max-height:600px) and (max-width:1100px){.transmission-view .experiment-sidebar{overflow-y:auto}.transmission-view .info-card{flex:0 0 auto}}
 @media (max-width:420px) and (orientation:portrait){.transmission-view .info-card,.transmission-view .controls-card{padding:8px 10px}.transmission-view .reflection-explanation{font-size:12px}}
+
+/* Step 90: permanent two-column filter controls avoid vertical shifts. */
+.transmission-filter-pair{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:8px 0}
+.transmission-filter-column{min-width:0;display:flex;flex-direction:column;gap:5px;color:var(--ink);font-size:12px;font-weight:700}
+.transmission-filter-column label{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.transmission-filter-column select{width:100%;min-width:0;min-height:38px;padding:6px 7px;background:#fff;border:1px solid var(--line);border-radius:7px;color:var(--ink);font:inherit;font-size:13px}
+.transmission-view .transmission-actions{margin-top:8px}
+.transmission-view .transmission-actions button{min-height:36px}
+@media(max-width:420px) and (orientation:portrait){.transmission-filter-pair{gap:6px}.transmission-filter-column{font-size:11px}.transmission-filter-column select{font-size:12px;padding:5px}}
+
+/* Keep transmission info panel height stable when single/double filter descriptions change. */
+@media (orientation:portrait){
+  .transmission-view .transmission-info{height:184px;min-height:184px;flex:0 0 184px;overflow:auto}
+}
