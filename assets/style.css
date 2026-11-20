@@ -92,9 +92,5 @@
 .additive-dot{width:12px;height:12px;border-radius:50%;flex:0 0 12px;border:1px solid #4443}
 .additive-dot.red{background:#ff0000}.additive-dot.green{background:#00ed00}.additive-dot.blue{background:#0000ff}
 .additive-onoff{font-size:10px;opacity:.85}
-.dev-version-bar{position:fixed;right:max(10px,env(safe-area-inset-right));bottom:max(9px,env(safe-area-inset-bottom));z-index:30;display:flex;align-items:center;gap:7px;max-width:calc(100vw - 20px);font-size:11px;color:#d0dfd5;pointer-events:none}
-.dev-version-bar[hidden]{display:none!important}
-.dev-version-bar button{pointer-events:auto;cursor:pointer;padding:7px 10px;border:1px solid #91cfa6;background:#344b3d;color:#fff;border-radius:9px;font-size:11px;font-weight:700;box-shadow:0 2px 8px #0007}
-.dev-version-bar button:disabled{opacity:.6;cursor:wait}
 @media (max-width:420px) and (orientation:portrait){.additive-option{font-size:12px;gap:4px}.additive-view .info-card{height:151px;min-height:151px;flex-basis:151px}}
 @media (orientation:landscape) and (max-height:600px) and (max-width:1100px){.additive-view .info-card{height:auto;min-height:0;flex:1 1 0}.additive-buttons{gap:4px}.additive-option{min-height:36px;font-size:11px;padding:4px}}
