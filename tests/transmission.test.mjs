@@ -1,0 +1,14 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {LIGHTS,FILTERS,CODES_BY_MASK,transmittedCode,transmittedMask,transmissionStages,explanatoryText} from '../assets/transmission-model.js';
+test('Defaults: white through red -> red',()=>{assert.equal(transmittedCode('W',['R']),'R');assert.deepEqual(transmissionStages('W',['R']),['W','R']);});
+test('White through red then blue -> no output',()=>assert.deepEqual(transmissionStages('W',['R','B']),['W','R','K']));
+test('Yellow through cyan -> green',()=>assert.equal(transmittedCode('W',['Y','C']),'G'));
+test('Blue through yellow -> no output',()=>assert.equal(transmittedCode('B',['Y']),'K'));
+test('One filter all 4×6 combinations',()=>{for(const [l,lm] of Object.entries(LIGHTS))for(const [f,fm] of Object.entries(FILTERS)){assert.equal(transmittedMask(l,[f]),lm&fm);assert.equal(transmittedCode(l,[f]),CODES_BY_MASK[lm&fm]);}});
+test('Two filters all 4×6×6 combinations',()=>{for(const [l,lm] of Object.entries(LIGHTS))for(const [f,fm] of Object.entries(FILTERS))for(const [g,gm] of Object.entries(FILTERS)){assert.equal(transmittedMask(l,[f,g]),lm&fm&gm);assert.deepEqual(transmissionStages(l,[f,g]),[CODES_BY_MASK[lm],CODES_BY_MASK[lm&fm],CODES_BY_MASK[lm&fm&gm]]);}});
+test('Filter order may swap, final output same but intermediate stage can differ',()=>{assert.equal(transmittedCode('W',['R','C']),transmittedCode('W',['C','R']));assert.notDeepEqual(transmissionStages('W',['R','C']),transmissionStages('W',['C','R']));});
+test('Removing second filter retains source-facing filter',()=>{const seq=['Y','B'];assert.equal(transmittedCode('W',seq.slice(0,1)),'Y');});
+test('No missing filtered segment after blocked light',()=>{const seq=transmissionStages('W',['R','B']);assert.equal(seq.indexOf('K'),2);});
+test('Input validation',()=>{assert.throws(()=>transmittedCode('K',['R']),RangeError);assert.throws(()=>transmittedCode('W',[]),RangeError);assert.throws(()=>transmittedCode('W',['R','B','G']),RangeError);assert.throws(()=>transmittedCode('W',['K']),RangeError);});
+test('Description reflects absence of outgoing ray',()=>{assert.match(explanatoryText('W',['R','B']),/沒有出射光/);assert.match(explanatoryText('W',['R']),/紅光/);});
