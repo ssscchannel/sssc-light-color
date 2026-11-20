@@ -16,3 +16,38 @@
 #sourceArc{stroke:#f9ce65;stroke-width:2.6;stroke-dasharray:6 5;opacity:1}
 #normalLines{stroke:#f7f9fb;stroke-width:2.2;stroke-dasharray:7 5;opacity:.96}
 .source-body{stroke:#ffe18c;stroke-width:3.4}
+
+/* Step 85: reflection experiment, isolated from the approved dispersion stage. */
+.reflection-stage{overflow:hidden}
+.reflection-stage svg{max-height:100%;touch-action:pan-y}
+.reflection-no-ray{position:absolute;top:14px;right:12px;font-size:12px;color:#f4ce7a;background:#252536d9;border:1px solid #9d8655;border-radius:7px;padding:5px 8px}
+.reflection-view .info-card{height:auto;min-height:0;flex:0 0 auto;overflow:visible}
+.reflection-view .info-heading{align-items:flex-start}
+.reflection-view .info-badge{max-width:50%;white-space:normal;text-align:right;line-height:1.25}
+.reflection-comparison{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin:9px 0}
+.reflection-color-result{display:flex;align-items:center;gap:9px;min-width:0;background:var(--subject-soft);border:1px solid var(--line);border-radius:8px;padding:7px 8px;color:var(--ink)}
+.reflection-swatch{display:block;width:38px;height:38px;border:2px solid #eee;border-radius:6px;flex-shrink:0}
+.reflection-color-result small{font-size:11px;line-height:1.25;display:block}
+.reflection-color-result strong{display:block;font-size:15px;margin-top:3px;color:#325c42}
+.reflection-explanation{min-height:40px;color:#46515c}
+.reflection-control-heading{margin-top:10px!important;border-top:1px dashed var(--line);padding-top:10px}
+.reflection-color-buttons{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.reflection-option{min-height:37px;font-size:12px!important}
+.reflection-view .reflection-option.selected{outline:2px solid #e5be55;outline-offset:1px;border-color:var(--subject-deep);background:var(--subject-soft);color:#23573a}
+@media (max-width:420px) and (orientation:portrait){
+ .reflection-view .info-card{min-height:0;height:auto;flex:0 0 auto}
+ .reflection-color-result{gap:6px;padding:5px}
+ .reflection-swatch{width:30px;height:30px}
+ .reflection-color-result small{font-size:10px}
+ .reflection-view .info-card,.reflection-view .controls-card{padding:8px 10px}
+ .reflection-view .reflection-explanation{font-size:12px;line-height:1.35}
+ .reflection-view .reflection-info .illustration-note{font-size:10px!important}
+ .reflection-option{min-height:34px}
+}
+@media (orientation:landscape) and (max-height:600px) and (max-width:1100px){
+ .reflection-view .experiment-sidebar{overflow-y:auto}
+ .reflection-view .info-card{flex:0 0 auto;overflow:visible}
+ .reflection-option{min-height:30px}
+ .reflection-view .reflection-comparison{margin:5px 0}
+ .reflection-view .reflection-explanation{min-height:0}
+}
