@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#252536">
+<meta name="app-version" content="v87.2">
 <title>晟自然玩科學｜光與顏色（本機測試）</title>
-<link rel="stylesheet" href="assets/style.css">
+<link rel="stylesheet" href="assets/style.css?v=87.2">
 </head>
 <body>
 <div id="app" class="app-shell">
@@ -116,7 +117,55 @@
       </aside>
     </section>
   </main>
+  <!-- Temporary, menu-only development version control; remove after final acceptance. -->
+  <div id="devVersionBar" class="dev-version-bar" hidden>
+    <button type="button" id="devVersionButton">檢查／更新版本 <span id="devVersionLabel">v87.2</span></button>
+    <span id="devVersionStatus" role="status" aria-live="polite">測試版</span>
+  </div>
 </div>
-<script type="module" src="assets/app.js"></script>
+<style>
+.dev-version-bar{position:fixed;right:max(10px,env(safe-area-inset-right));bottom:max(9px,env(safe-area-inset-bottom));z-index:30;display:flex;align-items:center;gap:7px;max-width:calc(100vw - 20px);font-size:11px;color:#d0dfd5;pointer-events:none}
+.dev-version-bar[hidden]{display:none!important}
+.dev-version-bar button{pointer-events:auto;cursor:pointer;padding:7px 10px;border:1px solid #91cfa6;background:#344b3d;color:#fff;border-radius:9px;font-size:11px;font-weight:700;box-shadow:0 2px 8px #0007}
+.dev-version-bar button:disabled{opacity:.6;cursor:wait}
+@media (orientation:landscape) and (max-height:600px){.dev-version-bar{bottom:max(4px,env(safe-area-inset-bottom));right:5px}.dev-version-bar button{padding:5px 7px}}
+</style>
+<script>
+/* Development-only refresh: fetch current repository assets with cache reload, then navigate to uncached page URL. */
+(()=>{
+  const bar=document.getElementById('devVersionBar');
+  const button=document.getElementById('devVersionButton');
+  const status=document.getElementById('devVersionStatus');
+  const version=document.querySelector('meta[name="app-version"]').content;
+  const menu=document.getElementById('menuView');
+  // Only show the temporary action on the four-experiment menu.
+  const updateVisibility=()=>{bar.hidden=menu.hidden;};
+  new MutationObserver(updateVisibility).observe(menu,{attributes:true,attributeFilter:['hidden']});
+  updateVisibility();
+  button.addEventListener('click',async()=>{
+    button.disabled=true;status.textContent='正在確認…';
+    try{
+      const marker=Date.now();
+      const fresh=await fetch(new URL('index.html?versionCheck='+marker,location.href),{cache:'no-store'});
+      if(!fresh.ok)throw new Error('無法取得首頁：HTTP '+fresh.status);
+      const freshHtml=await fresh.text();
+      const currentVersion=(freshHtml.match(/<meta\s+name="app-version"\s+content="([^"]+)"/)||[])[1]||'未知版本';
+      status.textContent='取得 '+currentVersion+'，正在更新…';
+      const files=['index.html','assets/style.css','assets/app.js','assets/optics.js','assets/dispersion.js','assets/reflection.js','assets/reflection-model.js','assets/transmission.js','assets/transmission-model.js'];
+      const results=await Promise.all(files.map(async file=>{
+        const r=await fetch(new URL(file,location.href),{cache:'reload'});
+        if(!r.ok)throw new Error(file+'：HTTP '+r.status);
+        return file;
+      }));
+      if(results.length!==files.length)throw new Error('資源更新不完整');
+      status.textContent=currentVersion===version?'已重新取得資源':'發現新版 '+currentVersion;
+      const target=new URL('./',location.href);
+      target.searchParams.set('refresh',String(marker));
+      location.replace(target.href);
+    }catch(err){status.textContent='更新失敗，請再按一次';button.disabled=false;console.error('Version refresh failed',err);}
+  });
+})();
+</script>
+<script type="module" src="assets/app.js?v=87.2"></script>
 </body>
 </html>
